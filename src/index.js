@@ -2,22 +2,22 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import "@fontsource/roboto";
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 import App from './App.jsx';
 
 const darkTheme = createTheme({
   palette: {
-    type: 'dark',
+    mode: 'dark',
   },
 });
 
 ReactDOM.render(
   <React.StrictMode>
-    <MuiThemeProvider theme={darkTheme}>
+    <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <App />
-    </MuiThemeProvider>
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
