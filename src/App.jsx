@@ -1,12 +1,20 @@
-import { Container, Typography } from "@mui/material";
+import { Box } from "@mui/material";
+import Home from "./pages/Home";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route
+} from "react-router-dom";
 
 function App() {
   return (
-    <Container maxWidth="xl">
-      <Typography variant="h2">
-        General Knowledge Quiz
-      </Typography>
-    </Container>
+    <Box minHeight="100vh">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+    </Box>
   );
 }
 
