@@ -1,20 +1,18 @@
-import { Box } from "@mui/material";
-import Home from "./pages/Home";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route
-} from "react-router-dom";
+// import Home from "./pages/Home";
+import Quiz from "./pages/Quiz";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Stack } from "@mui/material";
 
 function App() {
   return (
-    <Box minHeight="100vh">
+    <Stack direction="column" minHeight="100vh">
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          {/* <Route path="/" element={<Home />} /> */}
+          <Route path="/" element={<Quiz />} />
         </Routes>
       </Router>
-    </Box>
+    </Stack>
   );
 }
 
