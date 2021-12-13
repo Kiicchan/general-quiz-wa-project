@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import QuestionForm from "../forms/Question";
+import Report from "../report/Report";
 
 export default function QuestionManager({ requestResults }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -19,7 +20,6 @@ export default function QuestionManager({ requestResults }) {
         currentChoice: null,
       };
     });
-    console.log(initialState);
     return initialState;
   });
 
@@ -38,16 +38,17 @@ export default function QuestionManager({ requestResults }) {
     }
   };
 
-  useEffect(() => {
-    console.log(questions);
-  });
-  return (
-    <QuestionForm
-      questionObj={questions[currentQuestion]}
-      onSubmit={handleChoice}
-      key={currentQuestion} //forçar uma nova renderização ao trocar a key
-    />
-  );
+  if (currentQuestion > questions.length - 1) {
+    return <Report questions={questions} />;
+  } else {
+    return (
+      <QuestionForm
+        questionObj={questions[currentQuestion]}
+        onSubmit={handleChoice}
+        key={currentQuestion} //forçar uma nova montagem ao trocar a key
+      />
+    );
+  }
 }
 
 function decodeHtml(html) {

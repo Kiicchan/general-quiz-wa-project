@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 export default function Quiz() {
   const [count, setCount] = useState(null);
   const [data, setData] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (count) {
@@ -13,11 +14,12 @@ export default function Quiz() {
         .then((response) => response.json())
         .then((result) => {
           setData(result);
-          console.log(result);
         })
         .catch((error) => {
           setData(false);
-          console.log(error);
+          setError(
+            "Desculpe, ocorreu um erro na requisição. Tente novamente em alguns instantes"
+          );
         });
     }
   }, [count]);
@@ -27,6 +29,8 @@ export default function Quiz() {
   } else {
     return data ? (
       <QuestionManager requestResults={data.results} />
+    ) : error ? (
+      <div>{error}</div>
     ) : (
       <CircularProgress />
     );
