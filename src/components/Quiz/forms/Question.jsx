@@ -10,19 +10,19 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-const questionTemp = {
-  question: "A stimpmeter measures the speed of a ball over what surface?",
-  options: [
-    "Football Pitch",
-    "Cricket Outfield",
-    "Pinball Table",
-    "Golf Putting Green",
-  ],
-  number: 5,
-};
+// const questionTemp = {
+//   question: "A stimpmeter measures the speed of a ball over what surface?",
+//   options: [
+//     "Football Pitch",
+//     "Cricket Outfield",
+//     "Pinball Table",
+//     "Golf Putting Green",
+//   ],
+//   number: 5,
+// };
 
-export default function Question() {
-  const [value, setValue] = useState(null);
+export default function Question({ questionObj, onSubmit }) {
+  const [value, setValue] = useState(questionObj.currentChoice);
   const [error, setError] = useState(false);
   const handleRadioChange = (event) => {
     setValue(event.target.value);
@@ -31,21 +31,27 @@ export default function Question() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (value) {
-      alert(questionTemp.options[value]);
+    if (value !== null) {
+      onSubmit(Number(value), true);
     } else {
       setError(true);
     }
   };
+
+  const handleBack = () => {
+    onSubmit(Number(value), false);
+  };
+
   return (
     <Stack
       component="form"
       spacing={2}
       direction="column"
+      maxWidth={"500px"}
       onSubmit={handleSubmit}
     >
       <Typography variant="h6">
-        {questionTemp.number}. {questionTemp.question}
+        {questionObj.number}. {questionObj.question}
       </Typography>
       <FormControl component="fieldset">
         <FormLabel error={error} component="legend">
@@ -54,9 +60,10 @@ export default function Question() {
         <RadioGroup
           aria-label="options"
           name="options"
+          value={value}
           onChange={handleRadioChange}
         >
-          {questionTemp.options.map((answer, index) => {
+          {questionObj.options.map((answer, index) => {
             return (
               <FormControlLabel
                 value={index}
@@ -67,10 +74,19 @@ export default function Question() {
             );
           })}
         </RadioGroup>
-        <Button sx={{ alignSelf: "end" }} type="submit" variant="outlined">
+      </FormControl>
+      <Stack direction="row" justifyContent="space-between">
+        <Button
+          onClick={handleBack}
+          variant="outlined"
+          disabled={questionObj.number === 1}
+        >
+          Back
+        </Button>
+        <Button type="submit" variant="contained">
           Next
         </Button>
-      </FormControl>
+      </Stack>
     </Stack>
   );
 }

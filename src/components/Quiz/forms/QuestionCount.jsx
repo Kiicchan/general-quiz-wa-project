@@ -7,7 +7,7 @@ export default function QuestionCountForm({ onSubmit }) {
 
   const handleChange = (ev) => {
     const value = Number(ev.target.value);
-    if (Number.isInteger(value) && value < 100) {
+    if (Number.isInteger(value) && value < 51) {
       value > 0 ? setValue(value) : setValue("");
     }
   };
@@ -33,7 +33,7 @@ export default function QuestionCountForm({ onSubmit }) {
         id="quiz-question-count"
         autoComplete="off"
         label="Question Count"
-        placeholder="Enter a number (max: 99)"
+        placeholder="Enter a number (max: 50)"
         value={value}
         onChange={handleChange}
       />
