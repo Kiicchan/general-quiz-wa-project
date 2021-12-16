@@ -14,7 +14,8 @@ export default function Report({ questions }) {
   return (
     <Stack direction="column" spacing={2}>
       <Typography variant="h6">
-        Você acertou {correctAnswers} de {totalQuestions} questões
+        You correctly answered {correctAnswers} out of {totalQuestions}{" "}
+        questions
       </Typography>
       <RatingBar value={rating} />
       {questions.map((questionObj, index) => {

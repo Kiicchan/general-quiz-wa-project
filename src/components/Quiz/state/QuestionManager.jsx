@@ -1,8 +1,9 @@
 import { useState } from "react";
 import QuestionForm from "../forms/Question";
 import Report from "../report/Report";
+import { Button } from "@mui/material";
 
-export default function QuestionManager({ requestResults }) {
+export default function QuestionManager({ requestResults, onFinish }) {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [questions, setQuestions] = useState(() => {
     let initialState = requestResults.map((result, index) => {
@@ -39,7 +40,14 @@ export default function QuestionManager({ requestResults }) {
   };
 
   if (currentQuestion > questions.length - 1) {
-    return <Report questions={questions} />;
+    return (
+      <>
+        <Report questions={questions} />
+        <Button sx={{ width: "100%", marginTop: 2 }} onClick={onFinish}>
+          Try Again
+        </Button>
+      </>
+    );
   } else {
     return (
       <QuestionForm

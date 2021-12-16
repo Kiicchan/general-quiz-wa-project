@@ -14,6 +14,7 @@ export default function Quiz() {
         .then((response) => response.json())
         .then((result) => {
           setData(result);
+          console.log(result);
         })
         .catch((error) => {
           setData(false);
@@ -28,7 +29,13 @@ export default function Quiz() {
     return <QuestionCountForm onSubmit={setCount} />;
   } else {
     return data ? (
-      <QuestionManager requestResults={data.results} />
+      <QuestionManager
+        requestResults={data.results}
+        onFinish={() => {
+          setData(null);
+          setCount(null);
+        }}
+      />
     ) : error ? (
       <div>{error}</div>
     ) : (
