@@ -6,7 +6,7 @@ import QuizComponent from "../components/Quiz";
 export default function Quiz() {
   return (
     <>
-      <Header title="General Knowledge Quiz" Icon={QuizIcon} />
+      <Header title="Quiz" Icon={QuizIcon} />
       <Main>
         <Paper sx={{ padding: 2 }}>
           <QuizComponent />
