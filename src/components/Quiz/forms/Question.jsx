@@ -39,7 +39,11 @@ export default function Question({ questionObj, onSubmit }) {
   };
 
   const handleBack = () => {
-    onSubmit(Number(value), false);
+    if (value !== null) {
+      onSubmit(Number(value), false);
+    } else {
+      onSubmit(null, false);
+    }
   };
 
   return (
