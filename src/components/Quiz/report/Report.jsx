@@ -3,14 +3,8 @@ import Answer from "../report/Answer";
 import { Divider, Stack, Typography } from "@mui/material";
 import React from "react";
 
-export default function Report({ questions }) {
-  const totalQuestions = questions.length;
-  const correctAnswers = questions.reduce((correctAnswers, question) => {
-    return question.correctChoice === question.currentChoice
-      ? correctAnswers + 1
-      : correctAnswers;
-  }, 0);
-  const rating = (correctAnswers / totalQuestions) * 100;
+export default function Report({ report }) {
+  const { totalQuestions, correctAnswers, rating, questions } = report;
   return (
     <Stack direction="column" spacing={2}>
       <Typography variant="h6">

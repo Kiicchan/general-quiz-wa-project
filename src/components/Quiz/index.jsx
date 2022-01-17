@@ -14,7 +14,6 @@ export default function Quiz() {
         .then((response) => response.json())
         .then((result) => {
           setData(result);
-          console.log(result);
         })
         .catch((error) => {
           setData(false);

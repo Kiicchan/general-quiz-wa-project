@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import QuestionForm from "../forms/Question";
 import Report from "../report/Report";
 import { Button } from "@mui/material";
@@ -23,6 +23,7 @@ export default function QuestionManager({ requestResults, onFinish }) {
     });
     return initialState;
   });
+  const reportRef = useRef(null);
 
   const handleChoice = (choice, next) => {
     let newQuestionObj = {
@@ -39,10 +40,38 @@ export default function QuestionManager({ requestResults, onFinish }) {
     }
   };
 
+  useEffect(() => {
+    if (currentQuestion > questions.length - 1) {
+      let reportList = localStorage.getItem("report-list");
+      let reportArray;
+      if (reportList) {
+        reportArray = JSON.parse(reportList);
+      } else {
+        reportArray = [];
+      }
+      reportArray.push(reportRef.current);
+      localStorage.setItem("report-list", JSON.stringify(reportArray));
+    }
+  }, [currentQuestion, questions]);
+
   if (currentQuestion > questions.length - 1) {
+    const totalQuestions = questions.length;
+    const correctAnswers = questions.reduce((correctAnswers, question) => {
+      return question.correctChoice === question.currentChoice
+        ? correctAnswers + 1
+        : correctAnswers;
+    }, 0);
+    const rating = (correctAnswers / totalQuestions) * 100;
+    const report = {
+      totalQuestions,
+      correctAnswers,
+      rating,
+      questions,
+    };
+    reportRef.current = report;
     return (
       <>
-        <Report questions={questions} />
+        <Report report={report} />
         <Button sx={{ width: "100%", marginTop: 2 }} onClick={onFinish}>
           Try Again
         </Button>
