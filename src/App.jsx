@@ -1,4 +1,4 @@
-// import Home from "./pages/Home";
+import Home from "./pages/Home";
 import { useState, useMemo } from "react";
 import Quiz from "./pages/Quiz";
 import Assessment from "./pages/Assessment";
@@ -24,8 +24,8 @@ function App() {
         <Stack direction="column" minHeight="100vh">
           <Router>
             <Routes>
-              {/* <Route path="/" element={<Home />} /> */}
-              <Route path="/" element={<Quiz />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/quiz" element={<Quiz />} />
               <Route path="/assessment" element={<Assessment />} />
             </Routes>
           </Router>
