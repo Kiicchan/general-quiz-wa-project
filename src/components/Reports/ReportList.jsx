@@ -47,7 +47,13 @@ function ReportList(props) {
 
   return (
     <Stack direction="column" spacing={2} className={classes.widthQuery}>
-      <Typography variant="h6">Reports</Typography>
+      {data.length === 0 ? (
+        <Typography variant="h6" textAlign={"center"}>
+          There are no saved reports.
+        </Typography>
+      ) : (
+        <Typography variant="h6">Reports</Typography>
+      )}
       {data.map((report, index) => {
         return (
           <React.Fragment key={index}>
